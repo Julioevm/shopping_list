@@ -2,7 +2,15 @@
 
 const addButton = document.getElementById("addButton");
 const itemInput = document.getElementById("addInput");
-
+const ITEM_ = "item_";
+const LINE_THROUGH_STYLE = "text-decoration:line-through"
+const ITEM_SEGMENT = "ui clearing secondary segment";
+const ITEM_SECONDARY_SEGMENT = "ui clearing segment";
+const BUTTON_STYLE = "ui right floated mini button";
+const BUTTON_DELETE_ID = "deleteButton";
+const BUTTON_DONE_ID = "doneButton";
+const DONE = "Done";
+const X = "X";
 
 let items = [{
     id: 1,
@@ -12,7 +20,7 @@ let items = [{
 {
     id: 2,
     name: "Nuts",
-    done: false
+    done: true
 },
 ];
 
@@ -47,16 +55,41 @@ class DomManipulator {
         const itemList = document.getElementById("itemList");
     }
 
-    appendItem(item) {
+    getNewItem(item) {
         let newItem = document.createElement("div");
-        newItem.id = "item_" + item.id;
+    
+        newItem.id = ITEM_ + item.id;
+    
         if (item.done) {
-            newItem.style = "text-decoration:line-through";
-            newItem.className = "ui secondary segment";
+            newItem.style = LINE_THROUGH_STYLE;
+            newItem.className = ITEM_SEGMENT;
         } else {
-            newItem.className = "ui segment";
+            newItem.className = ITEM_SECONDARY_SEGMENT
         }
         newItem.innerText = item.name;
+        return newItem;
+    }
+
+    getDoneButton() {
+        let doneButton = document.createElement("button");
+        doneButton.id = BUTTON_DONE_ID;
+        doneButton.className = BUTTON_STYLE;
+        doneButton.innerText = DONE;
+        return doneButton;
+    }
+
+    getDeleteButton() {
+        let deleteButton = document.createElement("button");
+        deleteButton.id = BUTTON_DELETE_ID;
+        deleteButton.className = BUTTON_STYLE;
+        deleteButton.innerText = X;
+        return deleteButton;
+    }
+
+    appendItem(item) {
+        let newItem = this.getNewItem(item);
+        newItem.append(this.getDoneButton());
+        newItem.append(this.getDeleteButton());
         itemList.append(newItem);
     }
 

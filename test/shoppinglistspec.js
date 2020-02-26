@@ -66,7 +66,7 @@ describe('Testing the DOM manipulatior', () => {
         };
     });
 
-    it('should have HTML elements present', () => {
+    it('should have main HTML elements present', () => {
         expect($('#addButton')).toBeInDOM();
         expect($('#addInput')).toBeInDOM();
         expect($('#itemList')).toBeInDOM();
@@ -77,6 +77,14 @@ describe('Testing the DOM manipulatior', () => {
         expect($('#item_' + item.id)[0].innerText).toBe(item.name);
     })
 
+    it('should add done button when adding a new item', () => {
+        dom.appendItem(item);
+        expect($('#doneButton')).toBeInDOM();
+    })
+    it('should add delete button when adding a new item', () => {
+        dom.appendItem(item);
+        expect($('#deleteButton')).toBeInDOM();
+    })
     it('should remove item from the list', () => {
         dom.appendItem(item);
         dom.removeItem(ITEM_ + item.id);

@@ -1,6 +1,6 @@
 "use strict";
 
-describe('Testing the functionality of the shopping list', () => {
+describe('Shopping list functionality', () => {
 
     let shoppingList,
         item1,
@@ -47,7 +47,7 @@ describe('Testing the functionality of the shopping list', () => {
     })
 })
 
-describe('Testing the DOM manipulatior', () => {
+describe('DOM manipulatior', () => {
 
     const ITEM_ = "item_";
     let dom,
@@ -96,4 +96,43 @@ describe('Testing the DOM manipulatior', () => {
         dom.setItemAsDone(ITEM_ + item.id);
         expect($('#item_' + item.id)[0]).toHaveClass("secondary");
     })
+})
+
+describe('UI interactions', () => {
+
+    const ITEM_ = "item_";
+    let dom,
+        item,
+        shoppingList;
+
+    beforeEach(() => {
+        jasmine.getFixtures().fixturesPath = "fixtures/";
+        jasmine.getFixtures().load('form.html', 'list.html');
+
+        shoppingList = new ShoppingList();
+        dom = new DomManipulator();
+        item = {
+            id: 1,
+            name: "Milk",
+            done: false
+        };
+
+        $('#addButton')[0].onclick = () => {dom.addNewItemToPage(shoppingList)};
+    });
+
+    it('should insert new item thoughthe form', () => {
+        const itemName = 'Doritos';
+        let input = $('#addInput')[0];
+        let button = $('#addButton')[0];
+
+        input.value = itemName;
+        button.click();
+        console.log($('#itemList')[0])
+        expect($('#item_0')[0].innerText).toContain(itemName);
+    })
+
+    it('click done and mark item as done', () => {
+
+    })
+
 })

@@ -1,7 +1,5 @@
 "use strict";
 
-const addButton = document.getElementById("addButton");
-const itemInput = document.getElementById("addInput");
 const ITEM_ = "item_";
 const LINE_THROUGH_STYLE = "text-decoration:line-through"
 const ITEM_SEGMENT = "ui clearing secondary segment";
@@ -90,6 +88,7 @@ class DomManipulator {
         let newItem = this.getNewItem(item);
         newItem.append(this.getDoneButton());
         newItem.append(this.getDeleteButton());
+
         itemList.append(newItem);
     }
 
@@ -111,7 +110,8 @@ class DomManipulator {
     }
 
     addNewItemToPage(itemList) {
-        let itemText = itemInput.value;
+        const itemInput = document.getElementById("addInput");
+        let itemText = itemInput ? itemInput.value : null;
         
         if (itemText) {
             let id = itemList.getItems().length + 1;

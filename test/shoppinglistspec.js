@@ -74,7 +74,7 @@ describe('Testing the DOM manipulatior', () => {
 
     it('should insert new item to the list', () => {
         dom.appendItem(item);
-        expect($('#item_' + item.id)[0].innerText).toBe(item.name);
+        expect($('#item_' + item.id)[0].innerText).toContain(item.name);
     })
 
     it('should add done button when adding a new item', () => {

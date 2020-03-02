@@ -1,0 +1,7 @@
+#itemList div.vis-only-no-siblings{
+    display: none;
+}
+
+#itemList div.vis-only-no-siblings:only-child {
+    display: block;
+}

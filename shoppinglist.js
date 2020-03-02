@@ -10,18 +10,6 @@ const BUTTON_DONE_ID = "doneButton";
 const DONE = "Done";
 const X = "X";
 
-let items = [{
-    id: 1,
-    name: "Milk",
-    done: false
-},
-{
-    id: 2,
-    name: "Nuts",
-    done: true
-},
-];
-
 class ShoppingList {
     constructor() {
         this.ShoppingList = [];
@@ -114,8 +102,8 @@ class DomManipulator {
         let itemText = itemInput ? itemInput.value : null;
         
         if (itemText) {
-            let id = itemList.getItems().length + 1;
-            let item = {id: 0, name: itemText, done: false};
+            let itemId = itemList.getItems().length + 1;
+            let item = {id: itemId, name: itemText, done: false};
             itemList.addItem(item);
             this.appendItem(item);
             itemInput.value = "";

@@ -128,7 +128,7 @@ describe('UI interactions', () => {
         input.value = itemName;
         button.click();
         console.log($('#itemList')[0])
-        expect($('#item_0')[0].innerText).toContain(itemName);
+        expect($('#itemList > div')[0].innerText).toContain(itemName);
     })
 
     it('click done and mark item as done', () => {

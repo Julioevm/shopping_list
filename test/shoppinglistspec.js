@@ -51,14 +51,13 @@ describe('DOM manipulatior', () => {
 
     const ITEM_ = "item_";
     let dom,
-        item,
-        shoppingList;
+        item;
 
     beforeEach(() => {
         jasmine.getFixtures().fixturesPath = "fixtures/";
         jasmine.getFixtures().load('form.html', 'list.html');
-        shoppingList = new ShoppingList();
         dom = new DomManipulator();
+
         item = {
             id: 1,
             name: "Milk",
@@ -101,23 +100,23 @@ describe('DOM manipulatior', () => {
 describe('UI interactions', () => {
 
     const ITEM_ = "item_";
-    let dom,
-        item,
-        shoppingList;
+    let app,
+        item;
 
     beforeEach(() => {
         jasmine.getFixtures().fixturesPath = "fixtures/";
         jasmine.getFixtures().load('form.html', 'list.html');
 
-        shoppingList = new ShoppingList();
-        dom = new DomManipulator();
+        app = new App();
+
         item = {
             id: 1,
             name: "Milk",
             done: false
         };
 
-        $('#addButton')[0].onclick = () => {dom.addNewItemToPage(shoppingList)};
+        // Set event
+        $('#addButton')[0].onclick = () => {app.addNewItemToPage()};
     });
 
     it('should insert new item thoughthe form', () => {

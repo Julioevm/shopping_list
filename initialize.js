@@ -1,18 +1,19 @@
-const shoppinglist = new ShoppingList();
-const dom = new DomManipulator();
+
+const app = new App();
 const addButton = document.getElementById("addButton");
 
-// let items = [{
-//     id: 1,
-//     name: "Milk",
-//     done: false
-// },
-// {
-//     id: 2,
-//     name: "Nuts",
-//     done: true
-// },
-// ];
+addButton.onclick = () => {app.addNewItemToPage()};
 
-// dom.appendListItems(items);
-addButton.onclick = () => {dom.addNewItemToPage(shoppinglist)};
+    // let items = [{
+    //     id: 1,
+    //     name: "Milk",
+    //     done: false
+    // },
+    // {
+    //     id: 2,
+    //     name: "Nuts",
+    //     done: true
+    // },
+    // ];
+    
+    // dom.appendListItems(items);

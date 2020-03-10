@@ -43,9 +43,9 @@ class DomManipulator {
 
     getNewItem(item) {
         let newItem = document.createElement("div");
-    
+
         newItem.id = ITEM_ + item.id;
-    
+
         if (item.done) {
             newItem.style = LINE_THROUGH_STYLE;
             newItem.className = ITEM_SEGMENT;
@@ -98,22 +98,22 @@ class DomManipulator {
     }
 }
 
-class App{
- constructor() {
-     this.shoppingList = new ShoppingList();
-     this.dom = new DomManipulator();
- }
-
- addNewItemToPage() {
-    const itemInput = document.getElementById("addInput");
-    let itemText = itemInput ? itemInput.value : null;
-    
-    if (itemText) {
-        let itemId = this.shoppingList.getItems().length + 1;
-        let item = {id: itemId, name: itemText, done: false};
-        this.shoppingList.addItem(item);
-        this.dom.appendItem(item);
-        itemInput.value = "";
+class App {
+    constructor() {
+        this.shoppingList = new ShoppingList();
+        this.dom = new DomManipulator();
     }
-}
+
+    addNewItemToPage() {
+        const itemInput = document.getElementById("addInput");
+        let itemText = itemInput ? itemInput.value : null;
+
+        if (itemText) {
+            let itemId = this.shoppingList.getItems().length + 1;
+            let item = { id: itemId, name: itemText, done: false };
+            this.shoppingList.addItem(item);
+            this.dom.appendItem(item);
+            itemInput.value = "";
+        }
+    }
 }

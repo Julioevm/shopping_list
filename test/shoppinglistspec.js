@@ -36,13 +36,13 @@ describe('Shopping list functionality', () => {
 
     it('should mark item as done', () => {
         shoppingList.addItem(item1);
-        shoppingList.toggleDone(item1);
+        shoppingList.toggleDone(item1.id);
         expect(shoppingList.getItems()[0].done).toBe(true);
     })
 
     it('should mark item as undone', () => {
         shoppingList.addItem(item2);
-        shoppingList.toggleDone(item2);
+        shoppingList.toggleDone(item2.id);
         expect(shoppingList.getItems()[0].done).toBe(false);
     })
 })
@@ -115,23 +115,32 @@ describe('UI interactions', () => {
             done: false
         };
 
+        app.shoppingList.addItem(item);
+        app.dom.appendListItems(app.shoppingList.getItems())
+
         // Set event
-        $('#addButton')[0].onclick = () => {app.addNewItemToPage()};
+        $('#addButton')[0].onclick = () => { app.addNewItemToPage() };
+
+        const itemList = document.querySelector('.segment');
+        itemList.addEventListener('click', app.markItemAsDone.bind(app));
     });
 
     it('should insert new item thoughthe form', () => {
         const itemName = 'Doritos';
-        let input = $('#addInput')[0];
-        let button = $('#addButton')[0];
+        const input = $('#addInput')[0];
+        const button = $('#addButton')[0];
 
         input.value = itemName;
         button.click();
-        console.log($('#itemList')[0])
-        expect($('#itemList > div')[0].innerText).toContain(itemName);
+        //Get the second item, there should be an item already in the list
+        const secondItem = $('#itemList > div')[1];
+        expect(secondItem.innerText).toContain(itemName);
     })
 
-    it('click done and mark item as done', () => {
-
+    it('click done button and mark item as done', () => {
+        const doneButton = $('#item_1 > #doneButton')[0];
+        const firstItem = $('#itemList > div')[0];
+        doneButton.click();
+        expect(firstItem).toHaveClass('secondary');
     })
-
 })

@@ -2,8 +2,8 @@
 
 const ITEM_ = "item_";
 const LINE_THROUGH_STYLE = "text-decoration:line-through"
-const ITEM_SEGMENT = "ui clearing secondary segment";
-const ITEM_SECONDARY_SEGMENT = "ui clearing segment";
+const ITEM_SEGMENT = "ui clearing segment";
+const ITEM_SECONDARY_SEGMENT = "ui clearing secondary segment";
 const BUTTON_STYLE = "ui right floated mini button";
 const BUTTON_DELETE_ID = "deleteButton";
 const BUTTON_DONE_ID = "doneButton";
@@ -29,15 +29,14 @@ class ShoppingList {
         return this.ShoppingList;
     }
 
-    toggleDone(item) {
-        let index = this.getItems().indexOf(item);
+    toggleDone(itemId) {
+        let index = this.getItems().findIndex(x => x.id == itemId);
         this.ShoppingList[index].done = !this.ShoppingList[index].done;
     }
 }
 
 class DomManipulator {
     constructor() {
-        this.DomManipulator = [];
         const itemList = document.getElementById("itemList");
     }
 
@@ -48,9 +47,9 @@ class DomManipulator {
 
         if (item.done) {
             newItem.style = LINE_THROUGH_STYLE;
-            newItem.className = ITEM_SEGMENT;
+            newItem.className = ITEM_SECONDARY_SEGMENT;
         } else {
-            newItem.className = ITEM_SECONDARY_SEGMENT
+            newItem.className = ITEM_SEGMENT
         }
         newItem.innerText = item.name;
         return newItem;
@@ -87,8 +86,8 @@ class DomManipulator {
 
     setItemAsDone(id) {
         let item = document.getElementById(id);
-        item.style = "text-decoration:line-through";
-        item.className = "ui secondary segment";
+        item.style = LINE_THROUGH_STYLE;
+        item.className = ITEM_SECONDARY_SEGMENT;
     }
 
     appendListItems(items) {
@@ -115,5 +114,12 @@ class App {
             this.dom.appendItem(item);
             itemInput.value = "";
         }
+    }
+
+    markItemAsDone(event) {
+        const id = event.path[1].id;
+        const listId = id.split('_')[1];
+        this.shoppingList.toggleDone(listId);
+        this.dom.setItemAsDone(id);
     }
 }

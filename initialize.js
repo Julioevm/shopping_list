@@ -1,19 +1,13 @@
 
 const app = new App();
-const addButton = document.getElementById("addButton");
 
-addButton.onclick = () => {app.addNewItemToPage()};
-
-    // let items = [{
-    //     id: 1,
-    //     name: "Milk",
-    //     done: false
-    // },
-    // {
-    //     id: 2,
-    //     name: "Nuts",
-    //     done: true
-    // },
-    // ];
-    
-    // dom.appendListItems(items);
+document.querySelector('body').addEventListener('click', function (event) {
+    switch (event.target.id) {
+        case 'doneButton':
+            app.markItemAsDone(event);
+            break;
+        case 'addButton':
+            app.addNewItemToPage();
+            break;
+    }
+});

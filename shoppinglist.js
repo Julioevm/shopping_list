@@ -101,6 +101,7 @@ class App {
     constructor() {
         this.shoppingList = new ShoppingList();
         this.dom = new DomManipulator();
+        let self = this;
     }
 
     addNewItemToPage() {
@@ -122,4 +123,18 @@ class App {
         this.shoppingList.toggleDone(listId);
         this.dom.setItemAsDone(id);
     }
+
+    setEvents(){
+        let self = this;
+        document.querySelector('body').addEventListener('click', function (event) {
+                switch (event.target.id) {
+                    case 'doneButton':
+                        self.markItemAsDone(event);
+                        break;
+                    case 'addButton':
+                        self.addNewItemToPage();
+                        break;
+                }
+            });
+        }
 }

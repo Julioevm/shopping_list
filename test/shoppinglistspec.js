@@ -108,6 +108,7 @@ describe('UI interactions', () => {
         jasmine.getFixtures().load('form.html', 'list.html');
 
         app = new App();
+        app.setEvents();
 
         item = {
             id: 1,
@@ -117,12 +118,6 @@ describe('UI interactions', () => {
 
         app.shoppingList.addItem(item);
         app.dom.appendListItems(app.shoppingList.getItems())
-
-        // Set event
-        $('#addButton')[0].onclick = () => { app.addNewItemToPage() };
-
-        const itemList = document.querySelector('.segment');
-        itemList.addEventListener('click', app.markItemAsDone.bind(app));
     });
 
     it('should insert new item thoughthe form', () => {
@@ -137,10 +132,17 @@ describe('UI interactions', () => {
         expect(secondItem.innerText).toContain(itemName);
     })
 
-    it('click done button and mark item as done', () => {
+    it('should mark item as done if I click on the done button for that item', () => {
         const doneButton = $('#item_1 > #doneButton')[0];
         const firstItem = $('#itemList > div')[0];
         doneButton.click();
         expect(firstItem).toHaveClass('secondary');
+    })
+
+    it('should delete an item if I click on the delete button for said item', () => {
+        const deleteButton = $('#item_1 > #deleteButton')[0];
+        const firstItem = $('#itemList > div')[0];
+        deleteButton.click();
+        expect(firstItem).not.toBeInDOM();
     })
 })
